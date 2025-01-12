@@ -6,6 +6,7 @@ This repository demonstrates a **Proof of Concept (PoC)** for an SQL Injection v
 
 - `vulnerable.php`: A PHP script containing an SQL Injection vulnerability.
 - `secure.php`: A PHP script demonstrating how to mitigate the SQL Injection vulnerability using prepared statements.
+- `create_table.sql`: A SQL script to create the database and table used in the PoC, including sample data for testing.
 - `README.md`: This file explaining how to set up the environment, run the PoC, and understand the vulnerability.
 
 ## Prerequisites
@@ -39,7 +40,7 @@ Before running the PoC, you will need the following:
 
 #### Mac (Using MAMP)
 
-1. Download MAMP from [here].
+1. Download MAMP from [here](https://www.mamp.info/en/windows/).
 2. Install MAMP by following the instructions provided.
 3. Start the MAMP application, and click on Start Servers to begin Apache and MySQL.
 
@@ -48,7 +49,19 @@ Before running the PoC, you will need the following:
 1. Open phpMyAdmin from your browser by visiting http://localhost/phpmyadmin.
 2. Create a new database called test_db.
 3. Click on Databases and enter test_db in the database name field.
-4. Create a table called users in the test_db database with the values: `primary key`, `username` and `PASSWORD`.
+4. Use the provided `create_table.sql` script to set up the users table and insert sample data:
+  - In phpMyAdmin, select the test_db database.
+  - Navigate to the Import tab.
+  - Click Choose File, select `create_table.sql`, and click Go.
+  - This will create the users table with the following structure:
+      - `id`: Primary key, auto-increment.
+      - `username`: A `VARCHAR` field for storing usernames.
+      - `password`: A `VARCHAR` field for storing passwords.
+  - It will also insert the following sample data:
+    ```sql
+    ('admin', 'password123')
+    ('user1', 'mypassword')
+
 
 ### Step 3: Place the PHP Files
 
@@ -62,7 +75,13 @@ Before running the PoC, you will need the following:
 
 ### Step 4: Run the code
 
-1. Open your browser and navigate to: http://localhost/vulnerable_app/vulnerable.phpusername=admin
-- This should show the details of the admin user from the database.
-2. To exploit the vulnerability, change the URL to: http://localhost/vulnerable_app/vulnerable.php?username=' OR '1'='1
-- This will bypass authentication and retrieve all users from the database.
+1. Open your browser and navigate to:
+   ```arduino
+   http://localhost/vulnerable_app/vulnerable.phpusername=admin
+   ```
+   This should show the details of the admin user from the database.
+2. To exploit the vulnerability, change the URL to: 
+   ```bash
+   http://localhost/vulnerable_app/vulnerable.php?username=' OR '1'='1
+   ```
+   This will bypass authentication and retrieve all users from the database.
