@@ -34,5 +34,35 @@ Before running the PoC, you will need the following:
    sudo apt update
    sudo apt install apache2 mysql-server php php-mysqli
    sudo systemctl start apache2
-   sudo systemctl start mysql ```
+   sudo systemctl start mysql 
 2. The local server will be accessible at http://localhost in your browser.
+
+#### Mac (Using MAMP)
+
+1. Download MAMP from [here].
+2. Install MAMP by following the instructions provided.
+3. Start the MAMP application, and click on Start Servers to begin Apache and MySQL.
+
+### Step 2: Create the Database
+
+1. Open phpMyAdmin from your browser by visiting http://localhost/phpmyadmin.
+2. Create a new database called test_db.
+3. Click on Databases and enter test_db in the database name field.
+4. Create a table called users in the test_db database with the values: `primary key`, `username` and `PASSWORD`.
+
+### Step 3: Place the PHP Files
+
+1. Navigate to the folder where your server’s web files are stored:
+  - XAMPP: `C:\xampp\htdocs\`
+  - LAMP/MAMP: `/var/www/html/`
+2. Create a new directory called `vulnerable_app`.
+3. Copy the following files into this directory:
+  - `vulnerable.php`: The vulnerable PHP file.
+  - `secure.php`: The secure PHP file.
+
+### Step 4: Run the code
+
+1. Open your browser and navigate to: http://localhost/vulnerable_app/vulnerable.phpusername=admin
+- This should show the details of the admin user from the database.
+2. To exploit the vulnerability, change the URL to: http://localhost/vulnerable_app/vulnerable.php?username=' OR '1'='1
+- This will bypass authentication and retrieve all users from the database.
