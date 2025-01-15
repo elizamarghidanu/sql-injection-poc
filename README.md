@@ -77,7 +77,7 @@ Before running the PoC, you will need the following:
 
 1. Open your browser and navigate to:
    ```arduino
-   http://localhost/vulnerable_app/vulnerable.phpusername=admin
+   http://localhost/vulnerable_app/vulnerable.php?username=admin
    ```
    This should show the details of the admin user from the database.
 2. To exploit the vulnerability, change the URL to: 
